@@ -2,6 +2,7 @@ const express = require('express');
 let cors = require('cors');
 let sqlite3 = require('sqlite3').verbose();
 let { open } = require('sqlite');
+const { path } = require('express/lib/application');
 
 const app = express();
 const port = 3000;
@@ -9,11 +10,11 @@ app.use(cors());
 app.use(express.json());
 
 let db;
-const dbPath = process.env.DATABASE_PATH || './database.sqlite';
+
 
 (async () => {
   db = await open({
-    filename: dbPath,
+    filename: path.join(__dirname,'database.sqlite'),
     driver: sqlite3.Database,
   });
 })();
