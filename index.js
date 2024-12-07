@@ -9,10 +9,11 @@ app.use(cors());
 app.use(express.json());
 
 let db;
+const dbPath = process.env.DATABASE_PATH || './database.sqlite';
 
 (async () => {
   db = await open({
-    filename: './database.sqlite',
+    filename: dbPath,
     driver: sqlite3.Database,
   });
 })();
